@@ -1,5 +1,4 @@
-#define PROTOTYPE
-#if UNITY_EDITOR || UNITY_STANDALONE
+﻿#if UNITY_EDITOR || UNITY_STANDALONE
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
@@ -60,7 +59,7 @@ namespace ProBuilder2.Examples
 		[Range(1f, 50f)]
 		public float extrusion = 30f;
 
-		// An FFT returns a spectrum including frequencies that are out of human hearing range - 
+		// An FFT returns a spectrum including frequencies that are out of human hearing range -
 		// this restricts the number of bins used from the spectrum to the lower @fftBounds.
 		[Range(8, 128)]
 		public int fftBounds = 32;
@@ -125,7 +124,7 @@ namespace ProBuilder2.Examples
 
 			// Shell is all the faces on the new icosphere.
 			pb_Face[] shell = ico.faces;
-				
+
 			// Materials are set per-face on pb_Object meshes.  pb_Objects will automatically
 			// condense the mesh to the smallest set of subMeshes possible based on materials.
 #if !PROTOTYPE
@@ -135,12 +134,10 @@ namespace ProBuilder2.Examples
 			ico.gameObject.GetComponent<MeshRenderer>().sharedMaterial = material;
 #endif
 
-			pb_Face[] connectingFaces;
-
 			// Extrude all faces on the icosphere by a small amount.  The third boolean parameter
 			// specifies that extrusion should treat each face as an individual, not try to group
 			// all faces together.
-			ico.Extrude(shell, startingExtrusion, false, out connectingFaces);
+			ico.Extrude(shell, ExtrudeMethod.IndividualFaces, startingExtrusion);
 
 			// ToMesh builds the mesh positions, submesh, and triangle arrays.  Call after adding
 			// or deleting vertices, or changing face properties.
@@ -174,7 +171,14 @@ namespace ProBuilder2.Examples
 
 			// Build the waveform ring.
 			icoPosition = icoTransform.position;
+#if UNITY_4_5 || UNITY_4_6 || UNITY_4_7 || UNITY_5_0 || UNITY_5_1 || UNITY_5_2 || UNITY_5_3 || UNITY_5_4
 			waveform.SetVertexCount(WAVEFORM_SAMPLES);
+#elif UNITY_5_5
+			waveform.numPositions = WAVEFORM_SAMPLES;
+#else
+			waveform.positionCount = WAVEFORM_SAMPLES;
+#endif
+
 
 			if( bounceWaveform )
 				waveform.transform.parent = icoTransform;
@@ -196,8 +200,8 @@ namespace ProBuilder2.Examples
 			/**
 			 * For each face, translate the vertices some distance depending on the frequency range assigned.
 			 * Not using the TranslateVertices() pb_Object extension method because as a convenience, that method
-			 * gathers the sharedIndices per-face on every call, which while not tremondously expensive in most 
-			 * contexts, is far too slow for use when dealing with audio, and especially so when the mesh is 
+			 * gathers the sharedIndices per-face on every call, which while not tremondously expensive in most
+			 * contexts, is far too slow for use when dealing with audio, and especially so when the mesh is
 			 * somewhat large.
 			 */
 			for(int i = 0; i < outsides.Length; i++)

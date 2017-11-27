@@ -139,12 +139,12 @@ Material:
         second: 0.5
       data:
         first:
-          name: _Metallic
+          name: _Gloss
         second: 0.5
       data:
         first:
-          name: _Gloss
-        second: 0.5
+          name: _Metallic
+        second: 0
       data:
         first:
           name: _Parallax

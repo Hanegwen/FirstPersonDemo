@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2015
+# Visual Studio 2017
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FPSGES.Plugins", "FPSGES.Plugins.csproj", "{4AFCC0C6-07EE-7FF3-5FBF-4F1F6E576531}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FPSGES", "FPSGES.csproj", "{6B050D71-242A-1619-9408-0025667BBF9B}"

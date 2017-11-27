@@ -1,4 +1,3 @@
-#define PROTOTYPE
 using UnityEngine;
 using UnityEditor;
 using System.Collections.Generic;
@@ -53,12 +52,16 @@ class EditorCallbackViewer : EditorWindow
 
 		// Called when vertices have been moved by ProBuilder.
 		pb_Editor.OnVertexMovementFinish += OnVertexMovementFinish;
+
+		// Called when the Unity mesh is rebuilt from ProBuilder mesh data.
+		pb_EditorUtility.AddOnMeshCompiledListener(OnMeshCompiled);		
 	}
 
 	void OnDisable()
 	{
 		pb_Editor.RemoveOnEditLevelChangedListener(OnEditLevelChanged);
 		pb_EditorUtility.RemoveOnObjectCreatedListener(OnProBuilderObjectCreated);
+		pb_EditorUtility.RemoveOnMeshCompiledListener(OnMeshCompiled);
 		pb_Editor.OnSelectionUpdate -= OnSelectionUpdate;
 		pb_Editor.OnVertexMovementBegin -= OnVertexMovementBegin;
 		pb_Editor.OnVertexMovementFinish -= OnVertexMovementFinish;
@@ -90,6 +93,11 @@ class EditorCallbackViewer : EditorWindow
 	{
 		AddLog("Finished Moving Vertices");
 	}
+	
+	void OnMeshCompiled(pb_Object pb, Mesh mesh)
+	{
+		AddLog(string.Format("Mesh {0} rebuilt", pb.name));
+	}
 
 	void AddLog(string summary)
 	{
@@ -100,10 +108,10 @@ class EditorCallbackViewer : EditorWindow
 	void OnGUI()
 	{
 		GUILayout.BeginHorizontal(EditorStyles.toolbar);
-	
+
 			GUILayout.FlexibleSpace();
 
-			GUI.backgroundColor = collapse ? disabledColor : Color.white; 
+			GUI.backgroundColor = collapse ? disabledColor : Color.white;
 			if(GUILayout.Button("Collapse", EditorStyles.toolbarButton))
 				collapse = !collapse;
 			GUI.backgroundColor = Color.white;
@@ -125,7 +133,7 @@ class EditorCallbackViewer : EditorWindow
 
 		GUILayout.Space(4);
 
-		pb_GUI_Utility.DrawSolidColor(r, logBackgroundColor);
+		pb_EditorGUIUtility.DrawSolidColor(r, logBackgroundColor);
 
 		scroll = GUILayout.BeginScrollView(scroll);
 
@@ -136,8 +144,8 @@ class EditorCallbackViewer : EditorWindow
 		{
 			if(	collapse &&
 				i > 0 &&
-				i < len - 1 && 
-				logs[i].Equals(logs[i-1]) && 
+				i < len - 1 &&
+				logs[i].Equals(logs[i-1]) &&
 				logs[i].Equals(logs[i+1]) )
 				continue;
 
