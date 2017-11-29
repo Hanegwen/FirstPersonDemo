@@ -53,13 +53,14 @@ public class Door : MonoBehaviour, IActivatable
     private void OpenDoor()
     {
         isOpen = true;
-        animator.SetBool("shouldOpen", true);
+        animator.SetBool("isOpen", true);
     }
 
     // Use this for initialization
     void Start () 
 	{
         animator = GetComponent<Animator>();
+        animator.enabled = true;
         try
         {
             inventoryManager = GameObject.Find("Inventory Manager").GetComponent<InventoryManager>();

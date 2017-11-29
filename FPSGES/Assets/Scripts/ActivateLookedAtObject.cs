@@ -31,7 +31,7 @@ public class ActivateLookedAtObject : MonoBehaviour
 
     void HandleInput()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(1))
         {
             if (lookedAtObject != null)
             {
