@@ -5,6 +5,7 @@ using System;
 [RequireComponent(typeof(Animator))]
 public class Door : MonoBehaviour, IActivatable 
 {
+    GameManager gm;
     [SerializeField]
     InventoryObject key;
 
@@ -59,6 +60,7 @@ public class Door : MonoBehaviour, IActivatable
     // Use this for initialization
     void Start () 
 	{
+        gm = FindObjectOfType<GameManager>();
         animator = GetComponent<Animator>();
         animator.enabled = true;
         try
@@ -71,5 +73,13 @@ public class Door : MonoBehaviour, IActivatable
                      " with an InventoryManager script attached.");
         }
     }
-	
+
+    private void Update()
+    {
+        if(gm.hasKey)
+        {
+            hasKey = true;
+        }
+    }
+
 }

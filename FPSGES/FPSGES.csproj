@@ -168,15 +168,16 @@
     <Compile Include="Assets\ProCore\ProBuilder\API Examples\Vertex Colors\HighlightNearestFace.cs" />
     <Compile Include="Assets\Scripts\ActivateLookedAtObject.cs" />
     <Compile Include="Assets\Scripts\Door.cs" />
+    <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\IActivatable.cs" />
     <Compile Include="Assets\Scripts\InventoryManager.cs" />
     <Compile Include="Assets\Scripts\InventoryMenuItem.cs" />
     <Compile Include="Assets\Scripts\InventoryObject.cs" />
     <Compile Include="Assets\Scripts\MenuSystem.cs" />
     <Compile Include="Assets\Scripts\OnMouseDownDemo.cs" />
+    <Compile Include="Assets\Scripts\WinState.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Assets\Downlaoded\Customizable_Furnture\Readme\Readme.txt" />
     <None Include="Assets\Downlaoded\Laterns and candles\Shaders\GlassStainedBumpDistort.shader" />
     <None Include="Assets\Downlaoded\Rocks and Boulders 2\Shaders\Blend SM2.shader" />
     <None Include="Assets\Downlaoded\Rocks and Boulders 2\Shaders\Blend SM3.shader" />

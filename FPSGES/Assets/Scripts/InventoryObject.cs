@@ -12,6 +12,12 @@ public class InventoryObject : MonoBehaviour, IActivatable
 
     InventoryManager inventoryManager;
 
+    [SerializeField]
+    bool Key;
+
+    GameManager gm;
+
+
     public string NameText
     {
         get
@@ -30,6 +36,10 @@ public class InventoryObject : MonoBehaviour, IActivatable
 
     public void DoActivate()
     {
+        if(Key)
+        {
+            gm.hasKey = true;
+        }
         gameObject.SetActive(false);
         inventoryManager.InventoryObjects.Add(this);
     }
@@ -37,6 +47,7 @@ public class InventoryObject : MonoBehaviour, IActivatable
     // Use this for initialization
     void Start () 
 	{
+        gm = FindObjectOfType<GameManager>();
         try
         {    
             inventoryManager = GameObject.Find("Inventory Manager").GetComponent<InventoryManager>();
