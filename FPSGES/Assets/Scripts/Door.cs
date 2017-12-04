@@ -45,10 +45,22 @@ public class Door : MonoBehaviour, IActivatable
             hasKey = inventoryManager.InventoryObjects.Contains(key);
 
             if (hasKey)
+            {
                 OpenDoor();
+                PlayAudio();
+            }
         }
         else if (!isLocked)
+        {
             OpenDoor();
+            PlayAudio();
+        }
+    }
+
+    public void PlayAudio()
+    {
+        gm.audioSource.clip = gm.Pickup;
+        gm.audioSource.Play();
     }
 
     private void OpenDoor()

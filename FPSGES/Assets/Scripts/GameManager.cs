@@ -17,6 +17,15 @@ public class GameManager : MonoBehaviour {
     [SerializeField]
     public bool hasKey;
 
+    [SerializeField]
+    public AudioSource audioSource;
+
+    [SerializeField]
+    public AudioClip Pickup;
+
+    [SerializeField]
+    public AudioClip Menu;
+
 	// Use this for initialization
 	void Start ()
     {

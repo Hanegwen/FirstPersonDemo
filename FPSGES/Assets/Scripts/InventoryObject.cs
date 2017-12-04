@@ -42,6 +42,13 @@ public class InventoryObject : MonoBehaviour, IActivatable
         }
         gameObject.SetActive(false);
         inventoryManager.InventoryObjects.Add(this);
+        PlayAudio();
+    }
+
+    public void PlayAudio()
+    {
+        gm.audioSource.clip = gm.Pickup;
+        gm.audioSource.Play();
     }
 
     // Use this for initialization

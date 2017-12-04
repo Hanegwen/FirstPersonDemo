@@ -32,9 +32,12 @@ public class InventoryManager : MonoBehaviour
 
     bool isInventoryMenuShowing;
 
+    GameManager gm;
+
 	// Use this for initialization
 	void Start () 
 	{
+        gm = FindObjectOfType<GameManager>();
         InventoryObjects = new List<InventoryObject>();
         inventoryObjectToggles = new List<GameObject>();
         HideInventoryMenu();
@@ -61,10 +64,14 @@ public class InventoryManager : MonoBehaviour
             if (isInventoryMenuShowing)
             {
                 HideInventoryMenu();
+                gm.audioSource.clip = gm.Menu;
+                gm.audioSource.Play();
             }
             else
             {
                 ShowInventoryMenu();
+                gm.audioSource.clip = gm.Menu;
+                gm.audioSource.Play();
             }
         }
     }

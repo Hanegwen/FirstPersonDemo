@@ -2,4 +2,5 @@
 {
     string NameText { get; }
     void DoActivate();
+    void PlayAudio();
 }
